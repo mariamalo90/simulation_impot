@@ -6,6 +6,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SalaireController {
+    double calculTrimf(double salaireBrut){
+        double salaireAnnuel = salaireBrut*12;
+        double trimf;
+        if(salaireAnnuel < 600000){
+            trimf = 0;
+        }
+        else if(salaireAnnuel < 1000000){
+            trinmf = 3600;
+        }
+        else if(salaireAnnuel < 2000000){
+            trimf = 4800;
+        }
+        else if(salaireAnnuel < 7000000){
+            trimf = 12000;
+        }
+        else if(salaireAnnuel < 12000000){
+            trimf = 18000;
+        }
+        else if(salaireAnnuel > 12000000){
+            trimf = 36000;
+        }
+		
+   }
 private double calculImpotPart(double part, double temp){
     double impotAnnuel = temp;
     if(part == 1.5){
