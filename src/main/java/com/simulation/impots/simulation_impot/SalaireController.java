@@ -6,8 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SalaireController {
-    double calculTrimf(double salaireBrut){
-        double salaireAnnuel = salaireBrut*12;
+    double calculTrimf(double salaireAnnuel){
         double trimf;
         if(salaireAnnuel < 600000){
             trimf = 0;
@@ -110,10 +109,11 @@ private double calculImpotPart(double part, double temp){
             Salaire salaire = new Salaire();
             double salaireAnnuel = salaireBrut*12;
             double chargeSalaire = salaireAnnuel*0.3;
-            // calcu du net imposable qui correspond a la partie du salaire concernee par l'impot
+            // calcul du net imposable qui correspond a la partie du salaire concernee par l'impot
             double netImposable;
             double impotAnnuel;
             double temp;
+	    double trimf
             if(chargeSalaire<=900000){
                 netImposable = salaireAnnuel - chargeSalaire;
             }
@@ -138,7 +138,8 @@ private double calculImpotPart(double part, double temp){
             else {
                 temp = (4571000+((netImposable-13500000)*0.4));
             }
-            impotAnnuel = calculImpotPart(part,temp);
+  	    trimf = calculTrimf(salaireAnnuel);
+            impotAnnuel = calculImpotPart(part,temp) + trimf;
             salaire.setImpotSurRevenu(impotAnnuel/12);
             //il faut definir le trimf
 
